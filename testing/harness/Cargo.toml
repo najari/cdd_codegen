@@ -1,0 +1,15 @@
+[package]
+name = "harness"
+description = "Test support: checks generated code against the interpreter over every service of a description"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+cdd-rt = { path = "../../crates/cdd-rt" }
+cdd-model = { path = "../../crates/cdd-model" }
+cdd-codegen = { path = "../../crates/cdd-codegen" }

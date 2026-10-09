@@ -1,0 +1,18 @@
+[package]
+name = "cdd-rt"
+description = "no_std runtime for code generated from CDD files"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+default = ["std"]
+# `std` adds the loopback simulation; `alloc` adds helpers that build strings.
+std = ["alloc"]
+alloc = []
+
+[lints]
+workspace = true
+
+[dependencies]

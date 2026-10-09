@@ -1,0 +1,28 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/cdd-model",
+    "crates/cdd-rt",
+    "crates/cdd-codegen",
+    "crates/cdd-log",
+    "apps/cddgen",
+    "testing/harness",
+    "testing/canoe-samples",
+    "testing/synthetic",
+]
+exclude = ["docs/prototype"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.88"
+# The license is decided later, so the crates are not publishable yet.
+publish = false
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+unused_qualifications = "warn"
+
+[workspace.lints.clippy]
+dbg_macro = "warn"
+todo = "warn"

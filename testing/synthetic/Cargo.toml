@@ -1,0 +1,21 @@
+[package]
+name = "synthetic"
+description = "Code generated from two small CDD files written for this project, and the tests that need nothing of Vector's"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+build = "build.rs"
+
+[lints]
+workspace = true
+
+[dependencies]
+cdd-rt = { path = "../../crates/cdd-rt" }
+
+[dev-dependencies]
+cdd-model = { path = "../../crates/cdd-model" }
+harness = { path = "../harness" }
+
+[build-dependencies]
+cdd-codegen = { path = "../../crates/cdd-codegen" }
