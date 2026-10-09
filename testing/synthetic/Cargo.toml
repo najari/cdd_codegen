@@ -16,6 +16,7 @@ cdd-rt = { path = "../../crates/cdd-rt" }
 [dev-dependencies]
 cdd-model = { path = "../../crates/cdd-model" }
 harness = { path = "../harness" }
+cdd-codegen = { path = "../../crates/cdd-codegen" }
 
 [build-dependencies]
 cdd-codegen = { path = "../../crates/cdd-codegen" }
