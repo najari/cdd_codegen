@@ -371,8 +371,13 @@ Every command also takes `--help`. `decode-log` reads `.asc` and `.blf`.
 - Not supported: data types `VALTBL`, `COMPTBL`, `FORMULADT`; repeated parts whose elements vary in size (`ListOfParameters`,
   extended data records); `DOMAINDATAPROXYCOMP` (UDS 5.0.4). Messages that use them are left out and reported.
 - Logs: CAN FD frames in `.asc` are not read; `.blf` objects of types 1, 86, 100 and 101 only; ISO-TP with normal addressing.
-- The generator has been checked against CANoe's sample CDD files and logs and against small CDD files written for this project,
-  not against CANdelaStudio itself. The header of `diag.rs` says so (**Experimental**).
+- The generator has been checked against CANoe's sample CDD files and logs and against small CDD files written for this project.
+  It was also **spot-checked against CANdelaStudio 13** on `SampleUDS.cdd`: the byte layout of the `ReadDtcInformation` services
+  (a counted-to-the-end list of 3-byte DTC plus status byte), the bit positions and reserved bits of the DTC status byte, and the
+  multiplexer of the extended data record (`0x01` Occurrence Counter, `0x02` Healing Counter, `0x03` Condition as 2 bytes, any
+  other selector value uses the default structure, which is what the top `STRUCTURE` of a `MUXDT` is) all agree. This is not an
+  exhaustive comparison, and CANoe's own interpretation of messages (its trace and diagnostic console need a full license)
+  has not been compared. The header of `diag.rs` says so (**Experimental**).
 
 ## 10. Verification and development
 
@@ -779,7 +784,11 @@ cddgen decode-log <cdd> <log> [--id REQ:RESP]... [--channel N] [--ecu E] [--vari
 - 지원하지 않음: 데이터 타입 `VALTBL`, `COMPTBL`, `FORMULADT`, 원소 크기가 달라지는 반복 구조(`ListOfParameters`, 확장 데이터
   레코드), `DOMAINDATAPROXYCOMP`(UDS 5.0.4). 이를 쓰는 메시지는 건너뛰고 보고합니다.
 - 로그: `.asc`의 CAN FD 프레임은 읽지 않고, `.blf`는 객체 타입 1, 86, 100, 101만 읽으며, ISO-TP는 normal addressing만 지원합니다.
-- 생성기는 CANoe 샘플 CDD·로그와 이 프로젝트를 위해 만든 작은 CDD로 검증했고, CANdelaStudio와 직접 대조하지는 않았습니다.
+- 생성기는 CANoe 샘플 CDD·로그와 이 프로젝트를 위해 만든 작은 CDD로 검증했습니다. 또한 `SampleUDS.cdd`로 **CANdelaStudio 13과
+  일부 대조**했습니다. `ReadDtcInformation` 서비스의 바이트 구성(끝까지 반복되는 3바이트 DTC + 상태 바이트), DTC 상태 바이트의
+  비트 위치와 reserved 비트, 확장 데이터 레코드의 멀티플렉서(`0x01` Occurrence Counter, `0x02` Healing Counter, `0x03`
+  Condition 2바이트, 그 밖의 선택값은 기본 구조 — `MUXDT` 맨 위 `STRUCTURE`가 그것)가 모두 일치했습니다. 전수 비교는 아니며,
+  CANoe가 메시지를 해석한 결과(Trace, Diagnostic Console은 정식 라이선스가 필요)는 비교하지 못했습니다.
   `diag.rs` 머리말에도 그렇게 적혀 있습니다(**Experimental**).
 
 ## 10. 검증과 개발
